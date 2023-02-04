@@ -1,0 +1,47 @@
+create table Membro ( Nome varchar(100) NOT NULL,
+                    IdMemb integer NOT NULL UNIQUE
+                    CHECK ( IdMemb>0 ),
+                    Pais varchar(100) NOT NULL,
+                    PRIMARY KEY (IdMemb)
+                   );
+
+
+create table Amigo (IdMemb1 integer NOT NULL REFERENCES Membro(IdMemb),
+                               IdMemb2 integer NOT NULL REFERENCES Membro(IdMemb),
+                               PRIMARY KEY (IdMemb1, IdMemb2),
+                               UNIQUE (IdMemb1,IdMemb2));
+
+
+
+create table Livro(ISBN integer NOT NULL UNIQUE
+                            CHECK ( ISBN>=1 ),
+                            Titulo varchar(100) NOT NULL UNIQUE,
+                            PRIMARY KEY (ISBN));
+
+
+create table Genero (ISBN integer NOT NULL REFERENCES Livro(ISBN),
+		         genero varchar(100) NOT NULL,
+         PRIMARY KEY (ISBN,genero));
+
+
+
+create table Autor (CodA integer NOT NULL UNIQUE,
+                   Nome varchar(100) NOT NULL,
+                   Pais varchar(100) NOT NULL,
+                   PRIMARY KEY (CodA));
+
+
+		         
+create table Autoria (ISBN integer NOT NULL REFERENCES Livro(ISBN),
+                     CodA integer NOT NULL REFERENCES Autor(CodA),
+                     PRIMARY KEY (ISBN, CodA));
+
+                   
+create table Leu (IdMemb integer NOT NULL REFERENCES Membro(IdMemb),
+                 ISBN integer NOT NULL REFERENCES Livro(ISBN),
+                 PRIMARY KEY (IdMemb, ISBN));
+
+
+create table Gosta (IdMemb integer NOT NULL REFERENCES membro(IdMemb), 
+                    ISBN integer NOT NULL REFERENCES Livro(ISBN), 
+                    PRIMARY KEY (IdMemb, ISBN));

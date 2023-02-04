@@ -1,0 +1,282 @@
+
+--Criação de tabelas em SQL
+
+CREATE TABLE Pessoa (Nome VARCHAR(50) NOT NULL UNIQUE,
+                     Nacionalidade VARCHAR(50) NOT NULL,
+                     PRIMARY KEY (Nome));
+
+CREATE TABLE Premiacao_Pessoa (Nome VARCHAR(50) NOT NULL REFERENCES Pessoa(Nome),
+                               Lista_Nom_P VARCHAR(200) NOT NULL,
+                               Lista_Rec_P VARCHAR(200),
+                               PRIMARY KEY (Nome, Lista_Nom_P, Lista_Rec_P));
+
+CREATE TABLE Filme (Url VARCHAR(200) NOT NULL UNIQUE,
+                    Path VARCHAR (200) NOT NULL,
+                    Data_Estreia DATE NOT NULL,
+                    Local_filmagem VARCHAR(200) NOT NULL,
+                    Ling_original VARCHAR (100) NOT NULL,
+                    Ling_Dobragens VARCHAR (100) NOT NULL,
+                    Titulo VARCHAR (200) NOT NULL,
+                    Resumo VARCHAR (3000) NOT NULL,
+                    PRIMARY KEY (Url));
+
+CREATE TABLE Genero (Url VARCHAR (200) NOT NULL REFERENCES Filme(Url),
+	             Nome_Genero VARCHAR(50) NOT NULL,
+                     PRIMARY KEY (Url,Nome_Genero));
+
+
+
+CREATE TABLE Premiacao_Filme (Url VARCHAR(200) NOT NULL REFERENCES Filme(Url),
+                              Lista_Nom_F Varchar(200) NOT NULL,
+                              Lista_Rec_F Varchar(200),
+                              PRIMARY KEY (Url, Lista_Nom_F, Lista_Rec_F));
+
+
+
+CREATE TABLE Clientes (Login VARCHAR(100) NOT NULL UNIQUE,
+                       Pass_word VARCHAR(200) NOT NULL,
+                       Nome VARCHAR (100) NOT NULL,
+                       Data_Adesao Date NOT NULL,
+                       PRIMARY KEY (Login));
+
+--(Não nos foi possível usar a nomenclatura “Password” acima, em conformidade com o diagrama e com as tabelas pois “password” é uma função predefinida de SQL PostGres, pelo que optamos pela nomenclatura “Pass_Word”)
+
+CREATE TABLE Morada (Cod_Postal VARCHAR (30) Not NULL UNIQUE,
+                     Cidade VARCHAR (50) NOT NULL,
+                     Pais VARCHAR (50) NOT NULL,
+                     Rua VARCHAR (50) NOT NULL,
+                     PRIMARY KEY (Cod_Postal));
+
+
+
+CREATE TABLE Cartao_credito (Numero BIGINT NOT NULL UNIQUE, 
+                             Titular VARCHAR (50) NOT NULL, 
+                             validade DATE NOT NULL,
+                             PRIMARY KEY (Numero));
+
+
+
+CREATE TABLE Registo_Mensalidades (Login VARCHAR (100) NOT NULL
+                                   REFERENCES clientes (login),
+                                   Data_pagamento DATE NOT NULL,
+                                   Valor INTEGER NOT NULL CHECK (Valor=3),
+                                   PRIMARY KEY (Login, Data_Pagamento));
+
+
+
+CREATE TABLE Client_Mor (Login VARCHAR(100) NOT NULL UNIQUE REFERENCES
+		         Clientes(Login), Cod_Postal VARCHAR(30) NOT NULL 
+                         UNIQUE REFERENCES Morada(Cod_Postal), 
+                         PRIMARY KEY (Login, Cod_Postal));
+
+
+
+CREATE TABLE Client_CC (Login VARCHAR (100) NOT NULL UNIQUE REFERENCES
+                        clientes (login), Numero BIGINT NOT NULL UNIQUE REFERENCES Cartao_credito(Numero),
+                        PRIMARY KEY (Login, Numero));
+
+
+
+CREATE TABLE Filme_Ator (Nome VARCHAR (50) NOT NULL REFERENCES Pessoa (Nome),
+                         Url VARCHAR (200) NOT NULL REFERENCES Filme(Url), 
+                         PRIMARY KEY (Nome, Url));
+ 
+
+CREATE TABLE Filme_Dir (Nome VARCHAR(50) NOT NULL REFERENCES Pessoa(Nome),
+                        Url VARCHAR(200) NOT NULL REFERENCES Filme(Url),
+                        PRIMARY KEY (Nome, Url));
+
+
+
+CREATE TABLE Historial (Login VARCHAR (100) NOT NULL REFERENCES clientes (login),
+                        Url VARCHAR (200) NOT NULL REFERENCES Filme(Url), 
+                        Data_Visualiacao DATE NOT NULL,
+                        PRIMARY KEY (Login, Url));
+
+--Inserts
+
+Insert into Filme Values ('Url_1','Path_1','2010-07-16','Canada','English','Portuguese,Spanish','Inception,A Origem,Origen', 'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.');
+
+Insert into Filme Values
+('Url_2','Path_2','2014-11-07','Iceland','English','Portuguese,Spanish','Interstellar,Interestelar, Interestelar', 'A team of explorers travel through a wormhole in space in an attempt to ensure humanitys survival.');
+
+Insert into Filme Values
+('Url_3','Path_3','2013-11-21','Portugal','Portuguese','Portuguese','7 Pecados Rurais','The annual festival of Curral de Moinas is ready. Quim and Zé are eager to meet their Lisbon cousins and have a party without limits. But God decides to interfere with their plans and give those two sinners a true moral lesson.');
+
+Insert into Filme Values
+('Url_4','Path_4','2012-9-06','Portugal','Portuguese','Portuguese','Balas & Bolinhos: O Último Capítulo','Tone, the leader of the gang, returns home after sometime abroad, to try to save his fathers life that is on the verge of death, and needs a liver transplant to survive. For this task he needs the help of his gang, once again.');
+
+Insert into Filme Values
+('Url_5','Path_5','2003-03-28','Poland','English,Poland,Germany','Portuguese,Spanish','The Pianist, O Pianista, El pianista','A Polish Jewish musician struggles to survive the destruction of the Warsaw ghetto of World War II.');
+
+Insert into Filme Values
+('Url_6','Path_6','2014-01-10','China','English','Portuguese,Spanish','Her,Ela,Ella','In a near future, a lonely writer develops an unlikely relationship with an operating system designed to meet his every need.');
+
+Insert into Filme Values
+('Url_7','Path_7','2019-10-04','USA','English','Portuguese,Spanish','Joker, Coringa,Guasón','A mentally troubled stand-up comedian embarks on a downward spiral that leads to the creation of an iconic villain.');
+
+Insert into Filme Values
+('Url_8','Path_8','1995-09-22','USA','English','Portuguese,Spanish','S7ven,Os Sete Pecados Mortais,Seven','Two detectives, a rookie and a veteran, hunt a serial killer who uses the seven deadly sins as his motives.');
+
+Insert into Filme Values
+('Url_9','Path_9','1977-05-25','Guatemala','English','Portuguese,Spanish','Star Wars: A New Hope, Guerra das Estrelas: Uma Nova Esperança, La guerra de las galaxias: Una nueva esperanza','Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empires world-destroying battle station, while also attempting to rescue Princess Leia from the mysterious Darth Vader.');
+
+Insert into Filme Values
+('Url_10','Path_10','2016-02-12','Canada','English','Portuguese,Spanish','Deadpool','A wisecracking mercenary gets experimented on and becomes immortal but ugly, and sets out to track down the man who ruined his looks.');
+
+COMMIT;
+
+Insert into Genero Values('Url_1','Action');
+Insert into Genero Values('Url_1','Sci-Fi');
+Insert into Genero Values('Url_2','Adventure');
+Insert into Genero Values('Url_2','Sci-Fi');
+Insert into Genero Values('Url_3','Comedy');
+Insert into Genero Values('Url_4','Comedy');
+Insert into Genero Values('Url_5','Drama');
+Insert into Genero Values('Url_6','Drama');
+Insert into Genero Values('Url_7','Drama');
+Insert into Genero Values('Url_8','Thriller');
+Insert into Genero Values('Url_8','Mystery');
+Insert into Genero Values('Url_9','Fantasy');
+Insert into Genero Values('Url_10','Comedy');
+
+COMMIT;
+
+Insert into Clientes Values ('xxx','1234','Diogo Matos','2012-09-18');
+Insert into Clientes Values ('yyy','1234','Henrique Rosa','2019-10-04');
+
+
+COMMIT;
+
+Insert into Registo_Mensalidades values ('xxx','2022-09-18', 3);
+Insert into Registo_Mensalidades values ('xxx','2022-10-18', 3);
+Insert into Registo_Mensalidades values ('xxx','2022-11-18', 3);
+Insert into Registo_Mensalidades values ('xxx','2022-12-18', 3);
+Insert into Registo_Mensalidades values ('yyy','2022-10-04', 3);
+Insert into Registo_Mensalidades values ('yyy','2022-11-04', 3);
+Insert into Registo_Mensalidades values ('yyy','2022-09-04', 3);
+Insert into Registo_Mensalidades values ('yyy','2020-01-04', 3);
+Insert into Registo_Mensalidades values ('yyy','2022-12-02', 3);
+
+COMMIT;
+
+Insert into Historial values ('xxx','Url_1','2022-09-18');
+Insert into Historial values ('xxx','Url_2','2022-09-20');
+Insert into Historial values ('xxx','Url_3','2022-09-25');
+Insert into Historial values ('xxx','Url_4','2022-09-28');
+Insert into Historial values ('xxx','Url_5','2022-11-02');
+Insert into Historial values ('xxx','Url_6','2022-10-05');
+Insert into Historial values ('yyy','Url_6','2022-11-28');
+Insert into Historial values ('yyy','Url_7','2021-01-28');
+Insert into Historial values ('yyy','Url_8','2021-09-28');
+Insert into Historial values ('yyy','Url_9','2022-12-02');
+
+COMMIT;
+
+insert into Pessoa values ( 'Christopher Nolan' , 'England' );
+insert into Pessoa values ( 'Nicolau Breyner' , 'Portugal' );
+insert into Pessoa values ( 'Luis Ismael' , 'Portugal' );
+insert into Pessoa values ( 'Roman Polanski' , 'France' );
+insert into Pessoa values ( 'Spike Jonze' , 'USA' );
+insert into Pessoa values ( 'Todd Phillips' , 'USA' );
+insert into Pessoa values ( 'David Fincher' , 'USA' );
+insert into Pessoa values ( 'George Lucas' , 'USA' );
+insert into Pessoa values ( 'Tim Miller' , 'USA' );
+
+COMMIT;
+
+insert into Filme_Dir values ('Christopher Nolan' , 'Url_1');
+insert into Filme_Dir values ('Christopher Nolan' , 'Url_2');
+insert into Filme_Dir values ('Nicolau Breyner' , 'Url_3');
+insert into Filme_Dir values ('Luis Ismael' , 'Url_4');
+insert into Filme_Dir values ('Roman Polanski' , 'Url_5');
+insert into Filme_Dir values ('Spike Jonze' , 'Url_6');
+insert into Filme_Dir values ('Todd Phillips' , 'Url_7');
+insert into Filme_Dir values ('David Fincher' , 'Url_8');
+insert into Filme_Dir values ('George Lucas' , 'Url_9');
+insert into Filme_Dir values ('Tim Miller' , 'Url_10');
+
+COMMIT;
+
+insert into Pessoa values ('Leonardo Dicaprio' , 'USA');
+insert into Pessoa values ('Cillian Murphy' , 'Ireland');
+insert into Pessoa values ('Tom Hardy' , 'England');
+insert into Pessoa values ('Marion Cotillard' , 'France');
+insert into Pessoa values ('Matthew McConaughey' , 'USA');
+insert into Pessoa values ('Jessica Chastain' , 'USA');
+insert into Pessoa values ('MacKenzie Foy' , 'USA');
+insert into Pessoa values ('Matt Damon' , 'USA');
+insert into Pessoa values ('Pedro Alves' , 'Portugal');
+insert into Pessoa values ('João Paulo Rodrigues' , 'Portugal');
+insert into Pessoa values ('Patrícia Tavares' , 'Portugal');
+insert into Pessoa values ('Quim Barreiros' , 'Portugal');
+insert into Pessoa values ('Jorge Neto' , 'Portugal');
+insert into Pessoa values ('Luís Ismael' , 'Portugal');
+insert into Pessoa values ('J.D. Duarte' , 'Portugal');
+insert into Pessoa values ('João Pires' , 'Portugal');
+insert into Pessoa values ('Adrien Brody' , 'USA');
+insert into Pessoa values ('Emilia Fox' , 'England');
+insert into Pessoa values ('Ed Stoppard' , 'England');
+insert into Pessoa values ('Frank Finlay' , 'England');
+insert into Pessoa values ('Joaquin Phoenix' , 'USA');
+insert into Pessoa values ('Spike Jonze' , 'USA');
+insert into Pessoa values ('Joaquin Phoenix' , 'USA');
+insert into Pessoa values ('Robert De Niro' , 'Italy');
+insert into Pessoa values ('Brad Pitt' , 'USA');
+insert into Pessoa values ('Morgan Freeman' , 'USA');
+insert into Pessoa values ('Mark Hamill' , 'USA');
+insert into Pessoa values ('Harrison Ford' , 'USA');
+insert into Pessoa values ('Ryan Reynolds' , 'Canada');
+insert into Pessoa values ('T. J. Miller' , 'USA');
+
+COMMIT;
+
+insert into Filme_Ator values ('Leonardo Dicaprio' , 'Url_1');
+insert into Filme_Ator values ('Cillian Murphy' , 'Url_1');
+insert into Filme_Ator values ('Tom Hardy' , 'Url_1');
+insert into Filme_Ator values ('Marion Cotillard' , 'Url_1');
+insert into Filme_Ator values ('Matthew McConaughey' , 'Url_2');
+insert into Filme_Ator values ('Jessica Chastain' , 'Url_2');
+insert into Filme_Ator values (''MacKenzie Foy' , 'Url_2');
+insert into Filme_Ator values ('Matt Damon' , 'Url_2');
+insert into Filme_Ator values ('Pedro Alves' , 'Url_3');
+insert into Filme_Ator values ('João Paulo Rodrigues' , 'Url_3');
+insert into Filme_Ator values ('Patrícia Tavares' , 'Url_3');
+insert into Filme_Ator values ('Quim Barreiros' , 'Url_3');
+insert into Filme_Ator values ('Jorge Neto' , 'Url_4');
+insert into Filme_Ator values ('Luís Ismael' , 'Url_4');
+insert into Filme_Ator values ('J.D. Duarte' , 'Url_4');
+insert into Filme_Ator values ('João Pires' , 'Url_4');
+insert into Filme_Ator values ('Adrien Brody' , 'Url_5');
+insert into Filme_Ator values ('Emilia Fox' , 'Url_5');
+insert into Filme_Ator values ('Ed Stoppard' , 'Url_5');
+insert into Filme_Ator values ('Frank Finlay' , 'Url_5');
+insert into Filme_Ator values ('Joaquin Phoenix' , 'Url_6');
+insert into Filme_Ator values ('Spike Jonze' , 'Url_6');
+insert into Filme_Ator values ('Robert De Niro' , 'Url_7');
+insert into Filme_Ator values ('Joaquin Phoenix' , 'Url_7');
+insert into Filme_Ator values ('Brad Pitt' , 'Url_8');
+insert into Filme_Ator values ('Morgan Freeman' , 'Url_8');
+insert into Filme_Ator values ('Mark Hamill' , 'Url_9');
+insert into Filme_Ator values ('Harrison Ford' , 'Url_9');
+insert into Filme_Ator values ('Ryan Reynolds' , 'Url_10');
+insert into Filme_Ator values ('T. J. Miller' , 'Url_10');
+
+COMMIT;
+
+--(Disponibilizamos os inserts abaixo para o teste das expressões SQL das alíneas (h) e (i) da questão 10)
+
+insert into Premiacao_Filme values ('Url_1','Melhor Filme de 2010','Melhor Filme de 2010');
+insert into Premiacao_Filme values ('Url_1','Melhor Banda Sonora de 2010','Melhor banda sonora de 2010');
+insert into Premiacao_Filme values ('Url_2','Melhor Banda Sonora de 2014','Melhor banda sonora de 2014');
+
+COMMIT;
+
+insert into Premiacao_Pessoa values ('Leonardo Dicaprio','Melhor Ator de 2010','Melhor Ator de 2010');
+insert into Premiacao_Pessoa values ('Cillian Murphy','Melhor Ator Secundário de 2010','Melhor Ator Secundário de 2010');
+insert into Premiacao_Pessoa values ('Matthew McConaughey','Melhor Ator de 2014','Melhor Ator de 2014');
+
+COMMIT;
+
+
+
