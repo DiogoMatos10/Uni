@@ -1,0 +1,271 @@
+####################################################
+Antevisão AF | Implementação
+####################################################
+def areNeighbours(q1, q2, delta):
+    alphabet = set(delta[1] for t in delta)
+    for symbol in alphabet:
+        for (p, s, q) in delta:
+            if p == q1 and q == q2 :
+                return True
+            if p == q2 and q == q1 :
+                return True
+    return False
+###################################################
+def symbols(delta):
+    return set(s for _,s,_ in delta)
+###################################################
+def leadsTo(st,x):
+    return set(p for q,s,p in x if st==s)
+###################################################
+def controls(x):
+    return set(q for q,s,p in delta) or set(p for q,s,p in delta)
+####################################################
+Antevisão F01 | LR + AF
+####################################################
+def isBoring(t,delta):
+	cona=set(p for q,s,p in delta if t==q)
+	if len(cona)>1:
+		return False
+	return True
+####################################################
+Antevisão F01 | GIC + AP
+####################################################
+def is_upper(t):
+	if t[4][0].isupper():
+		return True
+	return False
+
+def compatible(c,t):
+	if t[0]==c[0] and (len(t[1])==0 or t[1]==c[1][0]):
+		return True
+	return False
+
+def is_prefix(c,t):
+	if len(t[2])>=0 or t[2]==c[2][0]:
+		return True
+	return False
+
+def is_wordT(t):
+	if len(t)>5:
+		return False
+	s0=t[2]
+	s1=t[4]
+	
+	if len(s0)>=0 and len(s1)>0 and (s1[0].isupper()):
+		return True
+	return False
+
+def is_symbolT(t):
+	if not (t[1].isupper()) or t[1]==' ':
+		return True
+	return False
+
+def is_fitting(c,t):
+	if is_symbolT(t) and is_wordT(t) and is_prefix(c,t) and is_upper(t) and compatible(c,t):
+		return True
+	return False 
+#######################################################
+def yes_ma_boy(grammar):
+	list=grammar[0][1]
+	if len(list)==0:
+		return True
+	for i in list:
+		if not i.isupper():
+			return True
+		return True
+
+def is_wellformed(grammar):
+	if grammar[0][0].isupper() and yes_ma_boy(grammar):
+		return True
+	return False
+#######################################################
+Exercícios Implementação | ER
+#######################################################
+def symbolsIn(word, sep='_'):
+    wordfinal=set()
+    dff=[]
+    if len(sep)==0:
+        for i in word :
+            dff.append(i)
+        wordfinal=dff
+    else:
+        wordfinal=word.split(sep)
+    return wordfinal
+########################################################
+def remove_duplicate(s):
+    res = []
+    for i in s:
+        if i not in res:
+            res.append(i)
+    return res
+def alphabetFor(word, sep=" "):
+    wordfinal = set()
+    if sep==" ":
+        wordfinal = word.split('_')
+        wordfinal = remove_duplicate(wordfinal)
+    else:
+        for i in word:
+            wordfinal.add(i)
+        wordfinal = remove_duplicate(wordfinal)
+    return wordfinal
+#########################################################
+def generated(word, alphabet, sep="_"):
+    symbols = set(word.split(sep))
+    return symbols.issubset(alphabet)
+#########################################################
+Exercícios Implementação | GIC
+#########################################################
+def is_symbol(x):
+    return isinstance(x,str) and len(x)>0 and ' ' not in x
+
+def is_variable(x):
+    return x[0].isupper() and is_symbol(x)
+
+def is_terminal(x):
+    return is_symbol(x) and not is_variable(x)
+    
+def is_word(x):
+    return isinstance(x,list) and all(is_symbol(i) for i in x)
+    
+def is_rule(rule):
+    return len(rule[1])==0 and is_variable(rule[0])
+
+def is_nil(rule):
+    return is_rule(rule)
+##########################################################
+def is_symbol(x):
+    return isinstance(x,str) and len(x)>0 and ' ' not in x
+
+def is_variable(x):
+    return is_symbol(x) and x[0].isupper()
+
+def is_terminal(x):
+    return is_symbol(x) and not is_variable(x) 
+
+def is_word(x):
+    return isinstance(x,list) and all(is_symbol(xi) for xi in x)
+
+def is_rule(x):
+    if isinstance(x,tuple) and len(x)==2:
+         (v,p)=x
+         return is_variable(v) and is_word(p)
+    else:
+        return False
+def is_recursive(rule):
+    return is_rule(rule) and rule[0] in rule[1]
+###########################################################
+def findInitial(rules):
+    st = 'S'
+    if len(rules) > 0:
+        for j in rules:
+            if st in j:
+                return st
+        for i in rules:
+            if i[0].isupper():
+                return i[0]
+    if len(rules) == 0:
+        return st
+############################################################
+def wellFormed(rules):
+    if not len(rules) == 0:
+        for i in rules:
+            if not len(i) == 0:
+                if i[0].isupper():
+                    for j in i:
+                        if len(j) > 1:
+                            for k in j:
+                                if k.isspace():
+                                    return False
+                                    break
+                    return True
+                return False
+            return False
+    return False
+#############################################################
+Antevisão | F02 + EN
+#############################################################
+def symbol(x):
+    return len(x) >= 0
+
+
+def variable(x):
+    return x[0].isupper() and symbol(x)
+
+
+def terminal(x):
+    return symbol(x) and not variable(x)
+
+
+def word(x):
+    return isinstance(x, tuple) and all(symbol(i) for i in x)
+
+
+def is_rule(x):
+    if isinstance(x, list) and len(x) == 2:
+        (v, p) = x
+        return variable(v) and word(p)
+    elif isinstance(x, list):
+        return variable(x[0])
+    else:
+        return False
+
+
+def is_grammar(grammar):
+    if len(grammar) > 1:
+        return is_rule(grammar[0]) and grammar[1].isupper()
+    return False
+#############################################################
+def symbol(x):
+	return len(x)>0 and ' ' not in x
+
+def variable(x):
+	if len(x)>=1:
+		return x[0].isupper() and symbol(x)
+	return False
+
+def word(x):
+	return isinstance(x,list) and all(symbol(i) for i in x)
+
+def is_rule(x):
+	if isinstance(x, tuple) and len(x) == 2:
+		(v,p)=x
+		return variable(v) and word(p)
+	elif isinstance(x, list):
+		return False
+	return False
+	
+def is_wellformed(rule):
+	if len(rule)>1:
+		return is_rule(rule)
+	elif len(rule)>2:
+		return False
+	return False
+################################################################
+import cfgcore as cfg
+
+def get_symbols(x):
+    if cfg.is_grammar(x):
+        lista = set()
+        splina = set()
+        for j in x[0]:
+            lista.add(j[0])
+            splina = set(j[1])
+            for i in splina:
+                lista.add(i)
+        return lista
+    else:
+        return None
+#################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
