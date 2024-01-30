@@ -1,0 +1,27 @@
+CREATE TABLE Artists(
+    artistID SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    typeArt VARCHAR(255) NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    acting BOOLEAN NOT NULL,
+    status VARCHAR(20) NOT NULL
+);
+
+
+CREATE TABLE Performances(
+    performanceID SERIAL PRIMARY KEY,
+    artistID INT,
+    date DATE,
+    location VARCHAR(255) NOT NULL,
+    FOREIGN KEY (artistID) REFERENCES Artists
+);
+
+
+CREATE TABLE Donations(
+    donationID SERIAL PRIMARY KEY,
+    artistID INT,
+    value INT NOT NULL,
+    FOREIGN KEY(artistID) REFERENCES Artists
+);
+
+
