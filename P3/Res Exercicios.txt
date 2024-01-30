@@ -1,0 +1,242 @@
+#####################################################################
+num(z).
+num(s(X)):-
+    num(X).
+
+le(z,_).
+le(s(A),s(B)):-
+    le(A,B).
+
+lt(z,s(_)).
+lt(s(A),s(B)):-
+    lt(A,B).
+
+soma(z,X,X):-
+    num(X).
+  
+soma(s(X),Y,s(Z)):-
+    soma(X,Y,Z).
+
+sub(A,B,X):-
+    soma(X,B,A).
+
+mult(z,_,z).
+mult(s(A),B,X):-
+    mult(A,B,Y),
+    soma(B,Y,X).
+
+div(A,B,X):-
+    mult(X,B,A).
+
+div(A,B,Q,R):-
+    mult(B,Q,X),
+    soma(X,R,A),
+    lt(R,B).
+
+num(z,0).
+num(s(X),SY):-
+    num(X,Y), 
+    SY is Y+1.
+
+dc(A, B, X) :-
+    le(X, A),
+    le(X, B),
+    div(A,X,_,z),
+    div(B,X,_,z).
+
+mc(A,B,X):-
+    le(B,X),
+    le(A,X),
+    mult(A,_,X),
+    mult(B,_,X).
+    
+min(A,B,C):-
+    lt(C,B),
+    lt(C,A),
+    num(A),
+    num(B),
+    num(C).
+
+max(A,B,C):-
+    lt(B,C),
+    lt(A,C),
+    num(A),
+    num(B),
+    num(C).
+
+################################################################################
+membro(X,[X|_]).
+membro(X,[_|L]):-membro(X,L).
+
+prefixo([],_).
+prefixo([X|L1],[X|L2]):-
+    prefixo(L1,L2).
+
+sufixo(L1,L1).
+sufixo(L1,[_|L2]):-
+    sufixo(L1,L2).
+
+sublista(S,L):-
+    prefixo(P,L),sufixo(S,P).
+
+catena([],L2,L2).
+catena([X|L1],L2,[X|L3]):-
+    catena(L1,L2,L3).
+
+nrev([],[]).
+nrev([X|L1],L2):-
+    nrev(L1,L1R),
+    catena(L1R,[X],L2).
+
+tamanho([],0).
+tamanho([_|T],X):-
+    tamanho(T,Y),
+    X is Y+1.
+
+num(z).
+num(s(X)):-
+    num(X).
+
+lt(z,s(_)).
+lt(s(A),s(B)):-
+    lt(A,B).
+
+le(z,_).
+le(s(A),s(B)):-
+    le(A,B).
+
+sequencia(A,B,[A]):-le(B,A).
+sequencia(A,B,[A|Resto]):-
+    le(A,B),
+    sequencia(s(A),B,Resto).
+
+double([],[]).
+double([X|L1],[X,X|L2]):-double(L1,L2).
+
+sel(E,[E|L1],L1).
+sel(E,[X|L1],[X|L2]):-
+    sel(E,L1,L2).
+
+
+adj(E1,E2,[E1,E2|_]).
+adj(E1,E2,[E2,E1|_]).
+adj(E1,E2,[_|Resto]):-
+    sel(E,L1,L2).
+
+soma([],0).
+soma([H|L],Res):-
+    soma(L,S),
+    Res is H+S.
+
+ord([]).
+ord([_]).
+ord([A,B|X]):-
+    le(A,B),
+    ord([B|X]).
+
+perm([],[]).
+perm(Resto,[X|L2]):-
+    sel(X,Resto,L1),
+    perm(L1,L2).
+
+sort(L1,L2):-
+    perm(L1,L2),
+    ord(L2).
+
+#############################################################################
+
+let rec membro l x=
+  match l with
+  | [] -> false
+  | h::t -> if x=h then true else membro t x;;
+
+let rec conta x l=
+  match l with
+  | [] -> 0
+  | h::t -> (if x=h then 1 else 0)+conta x t;;
+
+let rec append l1 l2=
+  match l1 with 
+  | [] -> l2
+  | h::t -> h :: append t l2;;
+
+let rec soma_lista l=
+  match l with
+  | [] -> 0
+  | h::t -> h+soma_lista t;;
+
+let rec remove x l=
+  match l with
+  | [] -> []
+  | h::t -> if h=x then t else h::remove x t;;
+
+let rec remove_all x l=
+  match l with
+  | [] -> []
+  | h::t -> if h=x then remove_all x t else h::remove_all x t;;
+
+let rec contagem l=
+  let rec contagem_elementos x contagem_lista =
+    match contagem_lista with
+    | []->(x,1)::[]
+    | (e, count)::t -> if e=x then (e,count+1)::t else (e,count)::contagem_elementos x t 
+  in
+  match l with
+  | []->[]
+  | h::t -> contagem_elementos h (contagem t);;
+
+############################################################################
+
+type 'a abp=
+  | Folha
+  | No of 'a abp * 'a * 'a abp;;
+
+let arvore_ex : int abp=
+  No (No (Folha, 3, Folha), 5, No (Folha, 8, Folha));;
+
+let rec lookup arvore x=
+  match arvore with
+  | Folha -> false
+  | No(esquerda, chave, direita) ->
+    if x=chave then true 
+    else if x<chave then lookup esquerda x
+    else lookup direita x;;
+
+let rec insert arvore x=
+  match arvore with
+  | Folha -> No(Folha, x, Folha)
+  | No(esquerda, chave, direita) ->
+    if x=chave then arvore
+    else if x<chave then No(insert esquerda x,chave,direita)
+    else No(esquerda,chave,insert direita x);;
+
+let rec delete arvore x=
+  match arvore with
+  | Folha -> Folha
+  | No(esquerda, chave, direita) ->
+    if x<chave then 
+      No(delete esquerda x, chave, direita)
+    else if x>chave then
+      No(esquerda, chave, delete direita x)
+    else
+      match (esquerda, direita) with
+      | (Folha,_) -> direita
+      | (_,Folha) -> esquerda
+      |_->
+        let novo_valor,nova_direita=encontra_sucessor direita in
+        No(esquerda, novo_valor, nova_direita)
+and encontra_sucessor arvore=
+  match arvore with
+  | No(Folha, chave, direita)->chave, direita
+  | No(esquerda,chave, direita)->
+    let valor,nova_esquerda=encontra_sucessor esquerda in
+      valor, No(nova_esquerda,chave, direita) 
+  | _->failwith "Algo deu errado ao encontrar o sucessor"
+
+let rec walk arvore f=
+  match arvore with
+  | Folha -> ()
+  | No(esquerda, chave, direita)->
+    walk esquerda f;
+    f chave; 
+    walk direita f;;
