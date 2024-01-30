@@ -1,0 +1,70 @@
+body{
+    background-color: whitesmoke;
+}
+
+#register-box {
+    font-family: "Roboto", sans-serif;
+    color: rgb(110, 110, 110);
+    position: absolute;
+    width: 300px;
+    height: 200px;
+    z-index: 15;
+    top: 40%;
+    left: 50%;
+    margin: -100px 0 0 -150px;
+    padding-top: 20px;
+    padding-bottom: 70px;
+    border-radius: 30px;
+    background-color: white;
+    box-shadow: 0px 0px 30px rgb(177, 176, 176);
+}
+
+#register-box h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+#register-box #username {
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    height: 30;
+    border-width: 1.5;
+    border-color: gray;
+}
+
+#register-box #password {
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    height: 30;
+    border-width: 1.5;
+    border-color: gray;
+}
+
+#register-box #role {
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    height: 30;
+    border-width: 1.5;
+    border-color: gray;
+}
+
+#register-box #submit {
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 0;
+
+    height: 30;
+    border-radius: 7px;
+    border-width: 1;
+    border-color: gray;
+}
+
+#button_div{
+    margin: 10 20%;
+}

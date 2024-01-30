@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vacinações Alentejo</title>
+    <link href="home.css" rel="stylesheet"/>
+</head>
+<body>
+<div  class="navbar">
+    <img id="logo_nav" src="VACINACAOALENTEJO.svg" alt="logotipo">
+    <div class="options">
+        <a class="active" href="home.html">Home</a>
+        <a href="admin.html">Administração</a>
+        <a href="schedule.html">Agendamentos</a>
+    </div>
+</div>
+
+<div class="content">
+    <div id="filter">
+        <label id="filt_farmacias" for="pharmacyNameFilter">Filtrar por Nome da Farmácia:</label>
+        <input type="text" id="pharmacyNameFilter">
+
+        <label for="cityFilter">Filtar por Cidade</label>
+        <select id="cityFilter">
+            <option value="">Todas as cidades</option>
+        </select>
+
+        <label for="vaccinationFilter">Filtrar por vacina</label>
+        <select id="vaccinationFilter">
+            <option value="">Todas as vacinas</option>
+            <option value="gripe">Gripe</option>
+            <option value="covid-19">Covid 19</option>
+        </select>
+        <button onclick="applyFilters()">Pesquisar</button>
+    </div>
+    <div class="list">
+        <div id="PharmacyBox">
+            <ul id="pharmacyList"></ul>
+            <div id="pagination"></div>
+        </div>
+
+    </div >
+
+    <div class="box">
+        <div id="pharmacyDetail">
+            <h3><span id="pharmacyName"></span></h3>
+            <p><span ></span></p>
+            <p><span id="pharmacyEmail"></span></p>
+            <p><span id="pharmacyTelephone"></span></p>
+            <p><span id="pharmacyService"></span></p>
+            <p><span id="pharmacyDirector"></span></p>
+            <div id="pharmacyLocation">
+                <h4 id="h4">Clica numa farmácia para poderes obter informação detalhada ou agendar uma vacinação!</h4>
+                <p><span id="pharmacyLongitude_Latitude"></span></p>
+                <p><span id="pharmacyStreet"></span></p>
+                <p><span id="pharmacyPostalCode"></span></p>
+                <p><span id="pharmacyLocality_Region"></span></p>
+            </div>
+            <div id="schedulingVacination"></div>
+        </div>
+    </div>
+
+
+    <div class="end">
+        <div id="block">
+            <a href="https://www.farmaciasportuguesas.pt/"><img id="farmacias_fim" src="logo_farmacias.svg"
+                                                                alt="Logo das farmacias portuguesas"></a>
+            <div id="credits">
+                <p>Criadores:</p>
+                <p>Diogo Matos, l54466</p>
+                <p>Henrique Rosa, l51923</p>
+                <p>Website criado em parceria com a <a href="https://www.uevora.pt/" id="UE">Universidade de Évora</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="script.js">
+</script>
+</html>

@@ -1,0 +1,224 @@
+:root{
+    --first-green: #013b06;
+    --second-green: #63c750;
+    --other-color: #eef6ee;
+    min-width: 750px;
+}
+
+#logo_nav {
+    margin-top: 3px;
+    margin-left: 15px;
+    min-height: 5px;
+    height: 55px;
+    float: left;
+
+}
+
+body{
+    font-family: sans-serif, serif;
+    overflow-y: scroll;
+}
+
+.options{
+    overflow: clip;
+    float: left;
+    background-color: var(--first-green);
+    text-align: center;
+    height: 48px;
+    width: 100%;
+    padding: 0;
+    margin-top: 0;
+    border: solid 3px white;
+}
+
+
+
+.navbar {
+    background-color: white;
+    width: 100%;
+    height: 60px;
+    position: fixed; top:0 ; left:0;
+    display: flex;
+    align-items: center;
+    z-index: 200000000;
+}
+
+.navbar a {
+    float: left;
+    text-decoration: none;
+    padding: 15px 50px;
+    color: white;
+    width: 100px;
+
+}
+
+@media screen and (max-width: 800px) {
+    .options{
+        width: 200px;
+        overflow-y: scroll;
+
+    }
+}
+
+.navbar a:hover:not(.active){
+    color: var(--second-green);
+}
+
+.navbar .active{
+    background-color: var(--second-green);
+}
+
+.active:hover{
+    color: var(--first-green);
+}
+
+.content{
+    margin-top: 80px;
+    margin-bottom: 180px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.lists{
+    width: 100%;
+}
+
+#gripeList{
+    background-color: var(--second-green);
+    border: 2px solid var(--first-green);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 30%;
+    height:300px;
+    list-style-type: none;
+    margin-left: 3%;
+    margin-right: 5%;
+}
+
+@media screen and (min-width: 1051px) {
+    #gripeList{
+        overflow: hidden;
+    }
+    #covidList{
+        overflow: hidden;
+    }
+}
+
+
+@media screen and (max-width: 1050px) {
+    #gripeList{
+        overflow-y: scroll;
+    }
+    #covidList{
+        overflow-y: scroll;
+    }
+}
+
+
+#gripeList li{
+    margin-top: 5px;
+}
+
+#gripeGraph{
+    width: 50%;
+    height: 300px;
+    float: right;
+    margin-top: -290px;
+    padding: 0;
+
+}
+
+
+
+#covidList{
+    background-color: var(--second-green);
+    border: 2px solid var(--first-green);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 30%;
+    height: 300px;
+    list-style-type: none;
+    margin-left: 3%;
+    margin-right: 5%;
+    margin-top: 50px;
+}
+
+#covidGraph{
+    float: right;
+    width: 50%;
+    margin-top: -300px;
+    height: 300px;
+}
+
+#addPharmacy{
+    position: center;
+    margin-top: 30px;
+    margin-left: 25px;
+    border: none;
+    outline: none;
+    background-color: #013b06;
+    padding: 11px 25px;
+    width: 200px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+}
+
+#formPharmacy{
+    margin-top: 20px;
+    width: 60%;
+    float: right;
+    height:200px;
+    margin-bottom: 150px;
+}
+
+#formPharmacy label{
+    display: inline;
+    font-size: medium;
+}
+#formPharmacy label:before{
+    content:"\a \a";
+    white-space: pre;
+}
+
+#formPharmacy button{
+    margin-top: 20px;
+
+}
+
+.end #block{
+    color: white;
+    position: fixed; bottom:0 ; right:0;
+    height: 100px;
+    width: 100%;
+    background-color: var(--first-green);
+}
+
+#credits {
+    font-size: small;
+    float: right;
+    margin-right: 20px;
+    text-align: end;
+}
+
+#farmacias_fim{
+    float: left;
+    max-width: 250px;
+    margin-top: 9px;
+    margin-left: 10px;
+}
+
+#credits p{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+#UE{
+    font-style: italic;
+    text-decoration: underline;
+    color:white
+}

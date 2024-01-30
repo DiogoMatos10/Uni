@@ -1,0 +1,98 @@
+body {
+    background-color: whitesmoke;
+}
+
+#login-box {
+    font-family: "Roboto", sans-serif;
+    color: rgb(110, 110, 110);
+    position: absolute;
+    width: 300px;
+    height: 200px;
+    z-index: 15;
+    top: 40%;
+    left: 50%;
+    margin: -100px 0 0 -150px;
+    padding-top: 20px;
+    padding-bottom: 70px;
+    border-radius: 30px;
+    background-color: white;
+    box-shadow: 0px 0px 30px rgb(177, 176, 176);
+}
+
+#login-box h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+#login-box #username {
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    height: 30;
+    border-width: 1.5;
+    border-color: gray;
+}
+
+#login-box #password {
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    height: 30;
+    border-width: 1.5;
+    border-color: gray;
+}
+
+#login-box #submit {
+
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 0;
+
+    height: 30;
+    border-radius: 7px;
+    border-width: 1;
+    border-color: gray;
+}
+
+#button_div {
+    margin: 0 20%;
+}
+
+#new_account {
+    width: 100%;
+    height: 30;
+    border-radius: 7px;
+    border-width: 1;
+    border-color: gray;
+}
+
+#new_account_div {
+    margin: -10px 20%;
+}
+
+#line_div {
+    width: 80%;
+    margin-left: 10%;
+    border-top: 1px lightgray solid;
+    margin-bottom: 20px;
+    margin-top: -15px;
+}
+
+@media (max-width: 300px) {
+    #login-box {
+        width: 100%;
+    }
+}
+
+.error{
+    text-align: center;
+    margin-bottom: 5px;
+    color: red;
+}
+
+.msg{
+    text-align: center;
+    color: green;
+}

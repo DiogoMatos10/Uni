@@ -1,0 +1,315 @@
+:root {
+    --first-green: #013b06;
+    --second-green: #63c750;
+    --other-color: #eef6ee;
+}
+
+#logo_nav {
+    margin-top: 3px;
+    margin-left: 15px;
+    min-height: 5px;
+    height: 55px;
+    float: left;
+
+}
+
+body {
+    font-family: sans-serif, serif;
+    overflow-y: scroll;
+    overflow-x: clip;
+}
+
+.options {
+    overflow: clip;
+    float: left;
+    background-color: var(--first-green);
+    text-align: center;
+    height: 48px;
+    width: 100%;
+    padding: 0;
+    margin-top: 0;
+    border: solid 3px white;
+}
+
+.navbar {
+    background-color: white;
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    z-index: 200000000;
+}
+
+.navbar a {
+    float: left;
+    text-decoration: none;
+    padding: 15px 50px;
+    color: white;
+    width: 100px;
+
+}
+
+.navbar a:hover:not(.active) {
+    color: var(--second-green);
+}
+
+.navbar .active {
+    background-color: var(--second-green);
+}
+
+.active:hover {
+    color: var(--first-green);
+}
+
+#title {
+    margin-left: 20px;
+    width: 400px;
+    font-size: 2.5em;
+    color: #013b06;
+}
+
+#filter {
+    position: center;
+    width: auto;
+    margin-left: 15%;
+    margin-right: 5%;
+}
+
+.end #block {
+    color: white;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    height: 100px;
+    width: 100%;
+    background-color: var(--first-green);
+}
+
+#credits {
+    font-size: small;
+    float: right;
+    margin-right: 20px;
+    text-align: end;
+}
+
+#farmacias_fim {
+    float: left;
+    max-width: 250px;
+    margin-top: 9px;
+    margin-left: 10px;
+}
+
+#credits p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+#UE {
+    font-style: italic;
+    text-decoration: underline;
+    color: white
+}
+
+.content {
+
+    margin-top: 80px;
+    height: 100%;
+    width: 100%;
+    font-size: 1.0em;
+    margin-bottom: 200px;
+
+}
+
+.list a {
+    margin-top: 0;
+    text-decoration: none;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 50px;
+    border-radius: 10px;
+}
+
+.list a:hover {
+    background-color: #87ec74;
+}
+
+.list {
+    float: left;
+    width: 40%;
+    text-align: center;
+    margin-left: 5%;
+    height: 450px;
+}
+
+.box {
+    margin-left: 40px;
+    min-width: 350px;
+    margin-top: 20px;
+    margin-right: 5%;
+    margin-bottom: 200px;
+    width: 40%;
+    height: 450px;
+    float: right;
+    background-color: var(--second-green);
+    border: 2px solid var(--first-green);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 1.2em;
+    right: 100%;
+    top: 100%;
+}
+
+@media screen and (max-width: 820px) {
+    .box {
+        width: 90%;
+        margin-top: 50px;
+        float: left;
+        margin-left: 5%;
+    }
+
+    .list {
+        width: 90%;
+    }
+
+    .options {
+        width: 200px;
+        overflow-y: scroll;
+    }
+}
+
+#pagination {
+    margin-top: 70px;
+    position: relative;
+    float: left;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+#pagination button {
+    margin: 0 2px;
+    border: none;
+    outline: none;
+    background-color: #013b06;
+    padding: 5px;
+    width: 50px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+}
+
+#pharmacyList {
+    list-style-type: none;
+    padding: 0;
+
+}
+
+#PharmacyBox {
+    margin-top: 20px;
+    min-width: 350px;
+    list-style-type: none;
+    padding: 0;
+    border: 2px solid #013b06;
+    border-radius: 10px;
+    height: 450px;
+    width: 100%;
+    background-color: var(--second-green);
+    float: left;
+}
+
+#pharmacyDetail p {
+    font-size: 0.8em;
+    margin: 0 0;
+}
+
+#pharmacyDetail {
+    text-align: center;
+    height: 300px;
+    width: 100%;
+    margin-top: -150px;
+}
+
+#pharmacyLocation {
+    margin-top: 10px;
+}
+
+#h4 {
+    margin: 0 30px;
+}
+
+#vaccinationForm {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#vaccinationForm label {
+    display: inline;
+    font-size: medium;
+
+}
+
+#vaccinationForm label:before {
+    content: "\a";
+    white-space: pre;
+}
+
+.box button {
+    border: none;
+    margin: auto 0;
+    outline: none;
+    background-color: #013b06;
+    padding: 11px 25px;
+    width: 200px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+}
+
+.box button:hover {
+    color: #63c750;
+}
+
+
+.lists {
+    display: flex;
+    align-items: center;
+}
+
+#gripeList,
+#covidList {
+    margin: 20px;
+    padding: 20px;
+    border: 2px solid #013b06;
+    border-radius: 10px;
+    background-color: #63c750;
+    width: 300px;
+    height: 300px;
+}
+
+.lists #addPharmacy {
+    border: none;
+    margin: auto 0;
+    outline: none;
+    background-color: #013b06;
+    padding: 11px 25px;
+    width: 200px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    display: block;
+    position: absolute;
+    left: 22.5%;
+    bottom: 35%;
+}
+
+#addPharmacy:hover {
+    color: #63c750;
+}

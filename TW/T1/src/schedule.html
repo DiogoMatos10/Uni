@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vacinações Alentejo</title>
+    <link href="schedule.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="navbar">
+    <img id="logo_nav" src="VACINACAOALENTEJO.svg" alt="logotipo">
+    <div class="options">
+        <a href="home.html">Home</a>
+        <a href="admin.html">Administração</a>
+        <a class="active" href="schedule.html">Agendamentos</a>
+    </div>
+</div>
+
+
+<div class="content">
+    <div id="numberfilter">
+        <label for="userIDSearch">Procurar agendamentos por Número de Utente:</label>
+        <input type="text" id="userIDSearch">
+        <button onclick="applySearch()">Pesquisar</button>
+    </div>
+    <div class="schedule">
+        <ul id="scheduleList"></ul>
+        <div id="pagination"></div>
+    </div>
+
+
+</div>
+<div class="end">
+    <div id="block">
+        <a href="https://www.farmaciasportuguesas.pt/"><img id="farmacias_fim" src="logo_farmacias.svg"
+                                                            alt="Logo das farmacias portuguesas"></a>
+        <div id="credits">
+            <p>Criadores:</p>
+            <p>Diogo Matos, l54466</p>
+            <p>Henrique Rosa, l51923</p>
+            <p>Website criado em parceria com a <a href="https://www.uevora.pt/" id="UE">Universidade de Évora</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<script src="script.js">
+</script>
+</html>
