@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.trabalhosma.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_nav_home_to_nav_perfil"
+            app:destination="@id/nav_perfil" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_disciplinas"
+            app:destination="@id/nav_disciplinas" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_media"
+            app:destination="@id/nav_media" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/nav_perfil"
+        android:name="com.example.trabalhosma.ui.perfil.PerfilFragment"
+        android:label="@string/menu_perfil"
+        tools:layout="@layout/fragment_perfil" />
+
+    <fragment
+        android:id="@+id/nav_disciplinas"
+        android:name="com.example.trabalhosma.ui.disciplinas.DisciplinasFragment"
+        android:label="@string/menu_disciplinas"
+        tools:layout="@layout/fragment_disciplinas" >
+        <action
+            android:id="@+id/action_nav_disciplinas_to_addDisciplina"
+            app:destination="@id/addDisciplina" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_media"
+        android:name="com.example.trabalhosma.ui.media.MediaFragment"
+        android:label="@string/menu_media"
+        tools:layout="@layout/fragment_media" />
+    <activity
+        android:id="@+id/addDisciplina"
+        android:name="com.example.trabalhosma.ui.disciplinas.AddDisciplina"
+        android:label="AddDisciplina" />
+</navigation>
